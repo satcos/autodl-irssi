@@ -27,6 +27,13 @@
 # This file will load Startup.pm.
 #
 
+# This is the entry point, Irssi calls this script
+# Constructor deletes any of the modules loaded earlier so that then can be loaded fresh
+# It imports Startup module and calls enable method from it
+# Irssi have the option of calling UNLOAD, in that case all modules will be deleted
+
+
+
 use 5.008;
 use strict;
 use warnings;

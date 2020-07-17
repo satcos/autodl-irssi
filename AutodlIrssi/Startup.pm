@@ -26,6 +26,24 @@
 # Loaded by autodl-irssi.pl, and this is where all the startup code is.
 #
 
+# enable and disable are the two major subroutines in this module
+# enable performs following tasks
+# 1. Get message buffer from MessageBuffer module
+# 2. Create all the temporary directories & loads configuration file
+# 3. Reads Autodl state, creates set of objects
+# 4. Binds autodl command and timeouts
+
+# disable performs following tasks
+# 1. Save the state
+# 2. Cleanup the objects
+
+
+# readAutodlState, saveAutodlState : Read and write AutodlState.xml
+# printVersionInfo : prints version info
+# command_autodl : possible commands from UI and associated subroutines
+# manualCheckForUpdates, showWhatsNew : For both Autodl and Tracker performs update and show whats new
+
+
 use 5.008;
 use strict;
 use warnings;
@@ -117,7 +135,7 @@ sub enable {
 
 	irssi_command_bind('autodl', \&command_autodl);
 
-	irssi_timeout_add(1000, \&secondTimer, undef);
+		irssi_timeout_add(1000, \&secondTimer, undef);
 }
 
 # Called when we're disabled
@@ -221,7 +239,6 @@ sub command_autodl {
 		chomp $@;
 		message 0, "command_autodl: ex: $@";
 	}
-}
 
 sub manualCheckForUpdates {
 	manualCheckForAutodlUpdates();
